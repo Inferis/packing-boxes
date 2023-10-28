@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "easycrates",
+	"version": "0.1-1.20.1",
+	"name": "Easy Crates",
+	"description": "This is a crates mod.",
+	"authors": [
+		"Tom Adriaenssen"
+	],
+	"contact": {
+		"homepage": "https://inferis.org",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "MIT",
+	"icon": "assets/easycrates/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"org.inferis.easycrates.EasyCrates"
+		],
+		"CLIENT": [
+			"org.inferis.easycrates.EasyCratesClient"
+		],
+		"fabric-datagen": [
+			"org.inferis.easycrates.EasyCratesDataGenerator"
+		]
+	},
+	"mixins": [
+		"easycrates.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.14.22",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
