@@ -17,8 +17,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class BoxBlockItem extends BlockItem {
-    //public CrateBlockEntity boxEntity;
-
     public BoxBlockItem(Block block, Settings settings) {
         super(block, settings.maxCount(1));
     }
