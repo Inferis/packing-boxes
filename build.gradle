@@ -107,7 +107,7 @@ publishing {
 import com.modrinth.minotaur.dependencies.ModDependency
  
 modrinth {
-	token = 'mrp_KAqp8ZPQu1aeQUgmUkJwk4HUkLLV77HyfFd910NZKn3uvcwfjh71JeLxmvdT' // Please use an environment variable for this! The default is `$MODRINTH_TOKEN`.
+	token = '$MODRINTH_TOKEN' // Please use an environment variable for this! The default is `$MODRINTH_TOKEN`.
     projectId = 'PFchvczr' // The ID of your Modrinth project. Slugs will not work.
     versionNumber = '1.0' // The (preferably SemVer) version of the mod. If not specified, it'll use the `version` declaration
     versionName = '1.0-1.20.x' // The version title. If not specified, it'll use the version number
