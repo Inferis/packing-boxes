@@ -1,15 +1,21 @@
 {
-    "type": "minecraft:crafting_shapeless",
+    "type": "minecraft:crafting_shaped",
     "category": "building",
-    "ingredients": [
-        {
+    "pattern": [
+        "SPS",
+        "P P",
+        "SPS"
+    ],
+    "key": {
+        "P": {
             "item": "minecraft:paper"
         },
-        {
+        "S": {
             "item": "minecraft:slime_ball"
         }
-    ],
+    },
     "result": {
-        "item": "packing_boxes:packing_tape"
+        "item": "packing_boxes:packing_tape",
+        "count": 4
     }
 }
