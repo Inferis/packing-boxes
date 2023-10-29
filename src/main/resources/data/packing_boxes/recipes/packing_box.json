@@ -1,12 +1,12 @@
 {
     "type": "minecraft:crafting_shapeless",
     "category": "building",
-    "entries": [
+    "ingredients": [
         {
             "item": "minecraft:paper"
         },
         {
-            "item": "minecraft:slimeball"
+            "item": "minecraft:slime_ball"
         }
     ],
     "result": {
