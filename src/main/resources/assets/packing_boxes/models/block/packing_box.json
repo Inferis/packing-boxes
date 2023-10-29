@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "packing_boxes:block/packing_box_plain",
+        "up": "packing_boxes:block/packing_box_top",
+        "down": "packing_boxes:block/packing_box_plain",
+        "west": "packing_boxes:block/packing_box_left",
+        "east": "packing_boxes:block/packing_box_right",
+        "north": "packing_boxes:block/packing_box_icons",
+        "south": "packing_boxes:block/packing_box_plain"
+    }
+}
+

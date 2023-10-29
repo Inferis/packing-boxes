@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "": {
+            "model": "packing_boxes:block/packing_box"
+        }
+    }
+}

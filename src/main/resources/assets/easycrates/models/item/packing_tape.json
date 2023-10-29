@@ -1,6 +1,0 @@
-{
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "easycrates:item/packing_tape"
-    }
-}

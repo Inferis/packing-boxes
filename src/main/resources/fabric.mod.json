@@ -1,9 +1,9 @@
 {
 	"schemaVersion": 1,
-	"id": "easycrates",
+	"id": "packing_boxes",
 	"version": "0.1-1.20.1",
-	"name": "Easy Crates",
-	"description": "This is a crates mod.",
+	"name": "Packing Boxes",
+	"description": "This is a packing boxes mod.",
 	"authors": [
 		"Tom Adriaenssen"
 	],
@@ -12,21 +12,21 @@
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
 	"license": "MIT",
-	"icon": "assets/easycrates/icon.png",
+	"icon": "assets/packing_boxes/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"org.inferis.easycrates.EasyCrates"
+			"org.inferis.packing_boxes.PackingBoxes"
 		],
 		"CLIENT": [
-			"org.inferis.easycrates.EasyCratesClient"
+			"org.inferis.packing_boxes.PackingBoxesClient"
 		],
 		"fabric-datagen": [
-			"org.inferis.easycrates.EasyCratesDataGenerator"
+			"org.inferis.packing_boxes.PackingBoxesDataGenerator"
 		]
 	},
 	"mixins": [
-		"easycrates.mixins.json"
+		"packing_boxes.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.14.22",

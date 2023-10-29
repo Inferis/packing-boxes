@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "category": "building",
+    "entries": [
+        {
+            "item": "minecraft:paper"
+        },
+        {
+            "item": "minecraft:slimeball"
+        }
+    ],
+    "result": {
+        "item": "packing_boxes:packing_tape"
+    }
+}
