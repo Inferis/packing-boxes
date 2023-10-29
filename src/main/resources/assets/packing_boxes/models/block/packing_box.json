@@ -7,7 +7,7 @@
         "west": "packing_boxes:block/packing_box_left",
         "east": "packing_boxes:block/packing_box_right",
         "north": "packing_boxes:block/packing_box_icons",
-        "south": "packing_boxes:block/packing_box_plain"
+        "south": "packing_boxes:block/packing_box_icons_minor"
     }
 }
 
