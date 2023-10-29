@@ -40,12 +40,7 @@ public class PackingTapeItem extends Item {
         BlockState destState = ModBlocks.CRATE.getDefaultState();
         world.setBlockState(blockPos, destState);
         if (world.getBlockEntity(blockPos) instanceof CrateBlockEntity boxEntity) {
-            if (targetEntity != null) {
-                boxEntity.container.entityNbt = targetEntity.createNbtWithId();
-            }
-            int itemId = Item.getRawId(targetBlock.asItem());
-            boxEntity.container.itemId = itemId;
-            boxEntity.markDirty();
+            boxEntity.populateContainer(targetBlock, targetState, targetEntity);
         }
         context.getStack().decrement(1);
 

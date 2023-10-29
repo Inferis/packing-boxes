@@ -1,18 +1,16 @@
 package org.inferis.easycrates.block;
 
-import org.inferis.easycrates.ImplementedInventory;
-
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.inventory.Inventories;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.nbt.NbtHelper;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.math.BlockPos;
 
-public class CrateBlockEntity extends BlockEntity implements ImplementedInventory {
+public class CrateBlockEntity extends BlockEntity {
     public final CrateContainer container = new CrateContainer();
-    private final DefaultedList<ItemStack> items = DefaultedList.ofSize(1, ItemStack.EMPTY);
 
     public CrateBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.CRATE_ENTITY, pos, state);
@@ -21,20 +19,30 @@ public class CrateBlockEntity extends BlockEntity implements ImplementedInventor
     public void copyFrom(CrateBlockEntity otherEntity) {
         container.entityNbt = otherEntity.container.entityNbt;
         container.itemId = otherEntity.container.itemId;
-        // items.clear();
-        // for (var item: otherEntity.items) {
-        //     items.add(item);
-        // }
+        container.blockState = otherEntity.container.blockState;
     }
 
-    @Override
-    public DefaultedList<ItemStack> getItems() {
-        return items;
+    public void populateContainer(Block block, BlockState state, BlockEntity entity) {
+        // Store Item Id
+        int itemId = Item.getRawId(block.asItem());
+        container.itemId = itemId;
+
+        // Store target state
+        container.blockState = state;
+
+        // Store entity nbt
+        if (entity != null) {
+            container.entityNbt = entity.createNbtWithId();
+        }
+        else {
+            container.entityNbt = null;
+        }
+
+        markDirty();
     }
 
     @Override
     public void writeNbt(NbtCompound nbt) {
-        Inventories.writeNbt(nbt, items);
         container.writeNbt(nbt);
         super.writeNbt(nbt);
     }
@@ -43,28 +51,46 @@ public class CrateBlockEntity extends BlockEntity implements ImplementedInventor
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
         container.readNbt(nbt);
-        Inventories.readNbt(nbt, items);
     }
 
     public class CrateContainer {
-        public NbtCompound entityNbt = null;
         public int itemId = 0;
+        public NbtCompound entityNbt = null;
+        public BlockState blockState = null;
 
         public void writeNbt(NbtCompound nbt) {
             NbtCompound containerNbt = new NbtCompound();
+
+            // Save item ite
+            containerNbt.putInt("itemId", itemId);
+
+            // Save entity nbt
             if (entityNbt != null) {
                 containerNbt.put("entityNbt", entityNbt);
             }
-            containerNbt.putInt("itemId", itemId);
+
+            if (blockState != null) {
+                NbtCompound stateNbt = NbtHelper.fromBlockState(blockState);
+                if (stateNbt != null) {
+                    containerNbt.put("blockStateNbt", stateNbt);
+                }
+            }
+
             nbt.put("easycrates", containerNbt);
         }
-    
+
         public void readNbt(NbtCompound nbt) {
             NbtCompound containerNbt = nbt.getCompound("easycrates");
             if (containerNbt.contains("entityNbt")) {
                 entityNbt = (NbtCompound)containerNbt.get("entityNbt");
             }
+
             itemId = containerNbt.getInt("itemId");
+
+            if (containerNbt.contains("blockStateNbt")) {
+                NbtCompound blockStateNbt = containerNbt.getCompound("blockStateNbt");
+                blockState = NbtHelper.toBlockState(Registries.BLOCK.getReadOnlyWrapper(), blockStateNbt);
+            }
         }
     }
 }
