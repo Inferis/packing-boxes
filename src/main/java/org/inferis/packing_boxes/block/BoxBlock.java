@@ -79,31 +79,42 @@ public class BoxBlock extends Block implements BlockEntityProvider {
             }
 
             if (world.isClient) {
+                // We're going to assume that everything went ok server side.
                 world.addBlockBreakParticles(blockPos, blockState);
                 return ActionResult.SUCCESS;
             }
 
             int itemId = boxEntity.container.itemId;
             if (itemId != 0) {
+                // Remove current box block entity, but we need to reconstruct
+                // our saved block.
                 BlockEntity currentEntity = world.getBlockEntity(blockPos);
                 currentEntity.markRemoved();
 
-                Block targetBlock = Block.getBlockFromItem(Item.byRawId(itemId));
-                BlockState targetState = targetBlock.getDefaultState();
+                Block savedBlock = Block.getBlockFromItem(Item.byRawId(itemId));
 
+                // Restore saved block
+                BlockState savedState;
                 if (boxEntity.container.blockState != null) {
-                    world.setBlockState(blockPos, boxEntity.container.blockState);
+                    savedState = boxEntity.container.blockState;
                 }
+                else {
+                    savedState = savedBlock.getDefaultState();                    
+                }
+                world.setBlockState(blockPos, savedState);
                 
+                // resture the block's nbt
                 if (boxEntity.container.entityNbt != null) {
-                    BlockEntity newEntity = BlockEntity.createFromNbt(blockPos, targetState, boxEntity.container.entityNbt);
-                    world.addBlockEntity(newEntity);
+                    BlockEntity savedEntity = BlockEntity.createFromNbt(blockPos, savedState, boxEntity.container.entityNbt);
+                    world.addBlockEntity(savedEntity);
                 }
                 
+                // and we need a sound of course
                 world.playSound(null, blockPos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS);
+                
                 return ActionResult.SUCCESS;
             }
-            else if (!world.isClient) {
+            else {
                 world.setBlockState(blockPos, Blocks.AIR.getDefaultState());
             }
         }
