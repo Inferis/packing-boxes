@@ -107,10 +107,13 @@ publishing {
 import com.modrinth.minotaur.dependencies.ModDependency
  
 modrinth {
-	token = '$MODRINTH_TOKEN' // Please use an environment variable for this! The default is `$MODRINTH_TOKEN`.
+	BufferedReader br = new BufferedReader(new FileReader(".modrinth_token"));
+    token = br.readLine(); 
+
     projectId = 'PFchvczr' // The ID of your Modrinth project. Slugs will not work.
-    versionNumber = '1.0' // The (preferably SemVer) version of the mod. If not specified, it'll use the `version` declaration
-    versionName = '1.0-1.20.x' // The version title. If not specified, it'll use the version number
+    versionNumber = '1.0.1' // The (preferably SemVer) version of the mod. If not specified, it'll use the `version` declaration
+    versionName = '1.0.1-1.20.x' // The version title. If not specified, it'll use the version number
+	changelog = 'Added sounds and particles.'
     uploadFile = remapJar // Tells Minotaur to use the remapped jar
     gameVersions = ['1.20', '1.20.1', '1.20.2'] // An array of game versions the version supports
     loaders = ['fabric'] // Self-explanatory.
