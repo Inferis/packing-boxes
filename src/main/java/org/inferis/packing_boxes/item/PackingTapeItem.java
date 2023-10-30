@@ -9,6 +9,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -43,6 +45,8 @@ public class PackingTapeItem extends Item {
             boxEntity.populateContainer(targetBlock, targetState, targetEntity);
         }
         context.getStack().decrement(1);
+
+        world.playSound(null, blockPos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS);
 
         return ActionResult.SUCCESS;
     }

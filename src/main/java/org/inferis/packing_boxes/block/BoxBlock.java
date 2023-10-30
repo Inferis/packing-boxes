@@ -15,6 +15,8 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
@@ -62,16 +64,23 @@ public class BoxBlock extends Block implements BlockEntityProvider {
     }
     
     public static ActionResult useBlock(PlayerEntity player, World world, Hand hand, BlockHitResult hitResult) {
-        if (world.isClient || player.isSpectator()) {
+        BlockPos blockPos = hitResult.getBlockPos();
+        BlockState blockState = world.getBlockState(blockPos);
+
+        if (player.isSpectator()) {
             return ActionResult.SUCCESS;
         }
 
-        BlockPos blockPos = hitResult.getBlockPos();
         BlockEntity entity = world.getBlockEntity(blockPos);
 
         if (entity instanceof BoxBlockEntity boxEntity) {
             if (!player.isSneaking()) {
                 return ActionResult.PASS;
+            }
+
+            if (world.isClient) {
+                world.addBlockBreakParticles(blockPos, blockState);
+                return ActionResult.SUCCESS;
             }
 
             int itemId = boxEntity.container.itemId;
@@ -90,9 +99,11 @@ public class BoxBlock extends Block implements BlockEntityProvider {
                     BlockEntity newEntity = BlockEntity.createFromNbt(blockPos, targetState, boxEntity.container.entityNbt);
                     world.addBlockEntity(newEntity);
                 }
+                
+                world.playSound(null, blockPos, SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS);
                 return ActionResult.SUCCESS;
             }
-            else {
+            else if (!world.isClient) {
                 world.setBlockState(blockPos, Blocks.AIR.getDefaultState());
             }
         }
