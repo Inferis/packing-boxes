@@ -39,7 +39,7 @@ public class BoxBlock extends Block implements BlockEntityProvider {
 
         public DropInventory(Item item, NbtCompound nbt) {
             itemStack = new ItemStack(item, 1);
-            BlockItem.setBlockEntityNbt(itemStack, ModBlockEntities.BOX_ENTITY, nbt);
+            BlockItem.setBlockEntityNbt(itemStack, ModBlockEntities.PACKING_BOX_ENTITY, nbt);
         }
 
         @Override

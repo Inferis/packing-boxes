@@ -18,7 +18,7 @@
 		"main": [
 			"org.inferis.packing_boxes.PackingBoxes"
 		],
-		"CLIENT": [
+		"client": [
 			"org.inferis.packing_boxes.PackingBoxesClient"
 		],
 		"fabric-datagen": [

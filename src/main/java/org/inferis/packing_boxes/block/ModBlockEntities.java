@@ -9,10 +9,10 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class ModBlockEntities {
-    public static BlockEntityType<BoxBlockEntity> BOX_ENTITY;
+    public static BlockEntityType<BoxBlockEntity> PACKING_BOX_ENTITY;
 
     public static void registerBlockEntities() {
-        BOX_ENTITY = Registry.register(
+        PACKING_BOX_ENTITY = Registry.register(
             Registries.BLOCK_ENTITY_TYPE,
             new Identifier(PackingBoxes.MODID, "packing_box_block_entity"),
             FabricBlockEntityTypeBuilder.create(BoxBlockEntity::new, ModBlocks.PACKING_BOX).build()

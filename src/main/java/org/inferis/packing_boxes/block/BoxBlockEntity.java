@@ -6,6 +6,9 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.math.BlockPos;
 
@@ -13,7 +16,7 @@ public class BoxBlockEntity extends BlockEntity {
     public final BoxContainer container = new BoxContainer();
 
     public BoxBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.BOX_ENTITY, pos, state);
+        super(ModBlockEntities.PACKING_BOX_ENTITY, pos, state);
     }
 
     public void copyFrom(BoxBlockEntity otherEntity) {
@@ -39,6 +42,16 @@ public class BoxBlockEntity extends BlockEntity {
         }
 
         markDirty();
+    }
+
+    @Override
+    public NbtCompound toInitialChunkDataNbt() {
+        return createNbt();
+    }
+
+    @Override
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
     }
 
     @Override
