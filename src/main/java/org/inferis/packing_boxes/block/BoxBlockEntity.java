@@ -9,7 +9,10 @@ import net.minecraft.nbt.NbtHelper;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.registry.BuiltinRegistries;
+import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.math.BlockPos;
 
 public class BoxBlockEntity extends BlockEntity {
@@ -35,7 +38,8 @@ public class BoxBlockEntity extends BlockEntity {
 
         // Store entity nbt
         if (entity != null) {
-            container.entityNbt = entity.createNbtWithId();
+            RegistryWrapper.WrapperLookup registryLookup = BuiltinRegistries.createWrapperLookup();
+            container.entityNbt = entity.createNbtWithId(registryLookup);
         }
         else {
             container.entityNbt = null;
@@ -45,8 +49,8 @@ public class BoxBlockEntity extends BlockEntity {
     }
 
     @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return createNbt();
+    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
+        return createNbt(registryLookup);
     }
 
     @Override
@@ -55,14 +59,14 @@ public class BoxBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void writeNbt(NbtCompound nbt) {
+    public void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         container.writeNbt(nbt);
-        super.writeNbt(nbt);
+        super.writeNbt(nbt, registryLookup);
     }
 
     @Override
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
+    public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt, registryLookup);
         container.readNbt(nbt);
     }
 

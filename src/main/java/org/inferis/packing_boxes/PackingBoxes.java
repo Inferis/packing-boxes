@@ -1,6 +1,7 @@
 package org.inferis.packing_boxes;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.impl.util.log.Log;
 
 import org.inferis.packing_boxes.block.ModBlocks;
 import org.inferis.packing_boxes.item.ModItemGroups;
@@ -14,6 +15,9 @@ public class PackingBoxes implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+        PackingBoxes.LOGGER.info("Initializing " + PackingBoxes.MODID);
+		System.out.println("init packing_boxes");
+		
 		ModBlocks.registerBlocks();
 		ModBlocks.registerUseBlockEvent();
 

@@ -15,6 +15,9 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.BuiltinRegistries;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -39,7 +42,7 @@ public class BoxBlock extends Block implements BlockEntityProvider {
 
         public DropInventory(Item item, NbtCompound nbt) {
             itemStack = new ItemStack(item, 1);
-            BlockItem.setBlockEntityNbt(itemStack, ModBlockEntities.PACKING_BOX_ENTITY, nbt);
+            BlockItem.setBlockEntityData(itemStack, ModBlockEntities.PACKING_BOX_ENTITY, nbt);
         }
 
         @Override
@@ -55,7 +58,8 @@ public class BoxBlock extends Block implements BlockEntityProvider {
             Block box = state.getBlock();
             BoxBlockItem boxItem = (BoxBlockItem)box.asItem();
 
-            DropInventory inventory = new DropInventory(boxItem, boxEntity.createNbt());
+            RegistryWrapper.WrapperLookup registryLookup = BuiltinRegistries.createWrapperLookup();
+            DropInventory inventory = new DropInventory(boxItem, boxEntity.createNbt(registryLookup));
             ItemScatterer.spawn(world, blockPos, inventory);
             world.updateComparators(blockPos, this);
         }
@@ -105,7 +109,8 @@ public class BoxBlock extends Block implements BlockEntityProvider {
                 
                 // resture the block's nbt
                 if (boxEntity.container.entityNbt != null) {
-                    BlockEntity savedEntity = BlockEntity.createFromNbt(blockPos, savedState, boxEntity.container.entityNbt);
+                    RegistryWrapper.WrapperLookup registryLookup = BuiltinRegistries.createWrapperLookup();
+                    BlockEntity savedEntity = BlockEntity.createFromNbt(blockPos, savedState, boxEntity.container.entityNbt, registryLookup);
                     world.addBlockEntity(savedEntity);
                 }
                 

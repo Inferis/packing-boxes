@@ -18,9 +18,9 @@ public class ModItemGroups {
         PackingBoxes.LOGGER.info("Registering item groups for " + PackingBoxes.MODID);
 
         PACKING_BOXES = Registry.register(Registries.ITEM_GROUP,
-            new Identifier(PackingBoxes.MODID, "packing_boxes"),
+            Identifier.of(PackingBoxes.MODID + ":" + PackingBoxes.MODID),
             FabricItemGroup.builder()
-                .displayName(Text.translatable("itemgroup.packing_boxes"))
+                .displayName(Text.translatable("itemgroup." + PackingBoxes.MODID))
                 .icon(() -> new ItemStack(ModItems.PACKING_BOX))
                 .entries((displayContext, entries) -> {
                     entries.add(ModItems.PACKING_TAPE);

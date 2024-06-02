@@ -18,7 +18,7 @@ public class ModBlocks {
 
         return Registry.register(
             Registries.BLOCK,
-            new Identifier(PackingBoxes.MODID, name),
+            Identifier.of(PackingBoxes.MODID + ":" + name),
             block);
     }
 

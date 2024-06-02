@@ -14,7 +14,7 @@ public class ModBlockEntities {
     public static void registerBlockEntities() {
         PACKING_BOX_ENTITY = Registry.register(
             Registries.BLOCK_ENTITY_TYPE,
-            new Identifier(PackingBoxes.MODID, "packing_box_block_entity"),
+            Identifier.of(PackingBoxes.MODID + ":packing_box_block_entity"),
             FabricBlockEntityTypeBuilder.create(BoxBlockEntity::new, ModBlocks.PACKING_BOX).build()
         );    
     }

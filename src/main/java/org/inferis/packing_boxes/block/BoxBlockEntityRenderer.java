@@ -20,8 +20,6 @@ import net.minecraft.world.World;
 
 @Environment(EnvType.CLIENT)
 public class BoxBlockEntityRenderer implements BlockEntityRenderer<BoxBlockEntity> {
-    // A jukebox itemstack
-
     public BoxBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
     }
 
