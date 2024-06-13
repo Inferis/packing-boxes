@@ -111,11 +111,11 @@ modrinth {
     token = br.readLine(); 
 
     projectId = 'PFchvczr' // The ID of your Modrinth project. Slugs will not work.
-    versionNumber = '1.1.121.pre3' // The (preferably SemVer) version of the mod. If not specified, it'll use the `version` declaration
-    versionName = '1.2.pre - 1.21pre3' // The version title. If not specified, it'll use the version number
-	changelog = 'Updated to 1.21 prerelease 3 (1.21-pre3).'
+    versionNumber = '1.1.121.rc1' // The (preferably SemVer) version of the mod. If not specified, it'll use the `version` declaration
+    versionName = '1.2.pre - 1.21rc1' // The version title. If not specified, it'll use the version number
+	changelog = 'Updated to 1.21 release candidate 1 (1.21-rc1).'
     uploadFile = remapJar // Tells Minotaur to use the remapped jar
-    gameVersions = ['1.21-pre3'] // An array of game versions the version supports
+    gameVersions = ['1.21-rc1'] // An array of game versions the version supports
     loaders = ['fabric'] // Self-explanatory.
     dependencies = [
             new ModDependency('P7dR8mSH', 'required') // Creates a new required dependency on Fabric API
