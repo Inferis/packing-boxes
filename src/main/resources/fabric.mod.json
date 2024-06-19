@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "packing_boxes",
-	"version": "1.1.121.pre1",
+	"version": "1.2.0",
 	"name": "Packing Boxes",
 	"description": "This is a packing boxes mod.",
 	"authors": [
@@ -30,7 +30,7 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.15.11",
-		"minecraft": "~1.21-beta.1",
+		"minecraft": "~1.21",
 		"java": ">=21",
 		"fabric-api": "*"
 	},
