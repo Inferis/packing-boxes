@@ -1,0 +1,6 @@
+{
+    "model": {
+      "type": "minecraft:model",
+      "model": "packing_boxes:item/packing_box"
+    }
+  }

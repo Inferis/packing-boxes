@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "packing_boxes",
-	"version": "1.2.0",
+	"version": "1.2.0+1.21.4",
 	"name": "Packing Boxes",
 	"description": "This is a packing boxes mod.",
 	"authors": [

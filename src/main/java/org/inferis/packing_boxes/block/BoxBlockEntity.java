@@ -106,7 +106,7 @@ public class BoxBlockEntity extends BlockEntity {
 
             if (containerNbt.contains("blockStateNbt")) {
                 NbtCompound blockStateNbt = containerNbt.getCompound("blockStateNbt");
-                blockState = NbtHelper.toBlockState(Registries.BLOCK.getReadOnlyWrapper(), blockStateNbt);
+                blockState = NbtHelper.toBlockState(Registries.BLOCK, blockStateNbt);
             }
         }
     }
