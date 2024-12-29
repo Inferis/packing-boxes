@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "tools",
+    "pattern": [
+      "SPS",
+      "P P",
+      "SPS"
+    ],
+    "key": {
+      "P": "minecraft:paper",
+      "S": "minecraft:slime_ball"
+    },
+    "result": {
+      "id": "packing_boxes:packing_tape",
+      "count": 4
+    }
+}
